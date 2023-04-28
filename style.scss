@@ -1,0 +1,244 @@
+@mixin phone{
+    @media (max-width:800px) {
+        @content
+    }
+}
+
+// start first design 
+
+// body{
+//     background-color: black;
+// }
+// h2{
+//     position:absolute;
+//     top:50%;
+//     left: 50%;
+//     transform: translate(-50%,-50%);
+//     cursor: pointer;
+//     font-family: sans-serif;
+//     margin: 0;
+//     padding: 0;
+//     font-size: 6em;
+//     @include phone{
+//         font-size: 4em;
+//     };
+//     text-transform: uppercase;
+//     span:nth-child(1){
+//         position:absolute;
+//         top: 0;
+//         left: 0;
+//         color: white;
+//         transition: all 0.5s linear;
+//         clip-path: polygon(0 0,100% 0, 100% 50%,0 50%);
+//         overflow: hidden;
+//     }
+//     span:nth-child(2){
+//         position: absolute;
+//         top:0;
+//         left:0;
+//         color: white;
+//         transition: all 0.5s linear;
+//         clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+//         overflow: hidden;
+//     }
+//     span:nth-child(3){
+//         position: absolute;
+//         top: 50%;
+//         left: 0;
+//         transform: translateY(-50%) scaleY(0);
+//         width: 91%;
+//         color: white;
+//         background-color: black;
+//         font-size: 15px;
+//         @include phone{
+//             font-size: 10px;
+//         };
+//         letter-spacing: 0.7em;
+//         text-align: center;
+//         padding-left: 20px;
+//         margin-left: 6px;
+//         transition: all 0.5s linear;
+//     }
+//     &:hover{
+//         span:nth-child(1){
+//             transform: translateY(-18px);
+//         }
+//         span:nth-child(2){
+//             transform: translateY(18px);
+//         }
+//         span:nth-child(3){
+//             transform: translateY(-50%) scaleY(1);
+//         }
+//     }
+// }
+// end first design 
+
+
+// start secound design 
+// *{
+//     margin: 0;
+//     padding:0;
+//     box-sizing:border-box;
+// }
+// header{
+//     border: 1px solid red;
+//     position: absolute;
+//     bottom: 0;
+//     left: 0;
+//     width: 100%;
+//     text-align: center;
+//     color: white;
+//     background-color: #252525;
+//     height: 50px;
+//     display: flex;
+//     justify-content: space-evenly;
+//     i{
+//         font-size: 20px;
+//         &:hover{
+//             border: 15px solid #252525;
+//             transform: translateY(-15px);
+//             border-radius: 30px;
+//         }
+//     }
+// }
+// end secound design 
+
+
+
+
+
+html {
+
+    box-sizing: border-box;
+    --bgColorMenu : #1d1d27;
+    --duration: .7s;    
+
+}
+
+html *,
+html *::before,
+html *::after {
+
+    box-sizing: inherit;
+
+}
+
+body{
+    
+    margin: 0;
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffb457;
+    transition: background-color var(--duration);
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+
+
+.menu{
+
+    display: flex;
+    width: 32.05em;
+    font-size: 1.5em;
+    padding: 0 2.85em;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bgColorMenu);
+    bottom: 0;
+    left: 0;
+    
+}
+
+.menu__item{
+    
+    all: unset;
+    flex-grow: 1;
+    z-index: 100;
+    display: flex;
+    cursor: pointer;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    padding: 0.55em 0 0.85em;
+    transition: transform var(--duration);
+    
+}
+
+.menu__item::before{
+    
+    content: "";
+    z-index: -1;
+    width: 4.2em;
+    height: 4.2em;
+    border-radius: 50%;
+    position: absolute;
+    transform: scale(0);
+    transition: background-color var(--duration), transform var(--duration);
+    
+}
+
+
+.menu__item.active {
+    transform: translate3d(0, -.8em , 0);
+}
+
+.menu__item.active::before{
+    
+    transform: scale(1);
+    background-color: var(--bgColorItem);
+
+}
+
+.icon{
+    
+    width: 2.6em;
+    height: 2.6em;
+    stroke: white;
+    fill: transparent;
+    stroke-width: 1pt;
+    stroke-miterlimit: 10;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 400;
+    
+}
+
+.menu__item.active .icon {
+    animation: strok 1.5s reverse;
+    
+}
+
+@keyframes strok {
+    100% {
+        stroke-dashoffset: 400;
+    }
+}
+
+.menu__border{
+
+    left: 0;
+    bottom: 99%;
+    width: 10.9em;
+    height: 2.4em;
+    position: absolute;
+    clip-path: url(#menu);
+    background-color: var(--bgColorMenu);
+    transition: transform var(--duration);
+}
+
+.svg-container {
+
+    width: 0;
+    height: 0;
+}
+
+
+@media screen and (max-width: 50em) {
+    .menu{
+        font-size: .8em;
+    }
+}
